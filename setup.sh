@@ -59,3 +59,6 @@ echo "* Installing additional PHP extensions..."
 sudo apt-get install -y php-memcache php-memcached php-redis  > /dev/null
 
 echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
+
+# echo "installing Rust"
+# curl https://sh.rustup.rs -sSf | sh -s -- -y
