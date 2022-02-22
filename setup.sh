@@ -52,7 +52,8 @@ echo "* Installing PHP 8.0..."
 sudo apt-get install -y php8.0 php8.0-common php8.0-cli > /dev/null
 
 echo "* Installing PHP 8.0 extensions..."
-sudo apt-get install -y php8.0-bz2 php8.0-curl php8.0-gd php8.0-mbstring php8.0-mysql php8.0-opcache php8.0-readline php8.0-soap php8.0-sqlite3 php8.0-tidy php8.0-xml php8.0-xsl php8.0-zip > /dev/null
+sudo  apt-get install -y --no-install-recommends libmagickwand-dev
+sudo apt-get install -y php8.0-bz2 php8.0-curl php8.0-gd php8.0-mbstring php8.0-mysql php8.0-opcache php8.0-readline php8.0-soap php8.0-sqlite3 php8.0-tidy php8.0-xml php8.0-xsl php8.0-zip php8.0-imagick libapache2-mod-php8.0 > /dev/null
 
 echo "* Installing additional PHP extensions..."
 sudo apt-get install -y php-memcache php-memcached php-redis  > /dev/null
