@@ -87,7 +87,7 @@ sudo apt-get install -y php8.1 php8.1-common php8.1-cli > /dev/null
 
 echo "* Installing PHP 8.1 extensions..."
 sudo  apt-get install -y --no-install-recommends libmagickwand-dev
-sudo apt-get install -y php8.1-bz2 php8.1-curl php8.1-gd php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-soap php8.1-sqlite3 php8.1-tidy php8.1-xml php8.1-xsl php8.1-zip > /dev/null
+sudo apt-get install -y php8.1-bz2 php8.1-curl php8.1-gd php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-soap php8.1-sqlite3 php8.1-tidy php8.1-xml php8.1-xsl php8.1-imagick php8.1-zip libapache2-mod-php8.1  > /dev/null
 
 echo "* Installing additional PHP extensions..."
 sudo apt-get install -y php-memcache php-memcached php-redis  > /dev/null
@@ -96,3 +96,5 @@ echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
 
 # echo "Installing Rust"
 # curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+# bash switch-to-php-8.1.sh
