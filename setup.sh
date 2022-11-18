@@ -1,4 +1,4 @@
-#!/bin/bash
+sail #!/bin/bash
 
 echo "install Git for ubuntu"
 sudo add-apt-repository ppa:git-core/ppa
@@ -24,8 +24,28 @@ source /home/code/.bashrc
 # subl -a /home/code/codecorp_docker
 
 
+
+
 echo "* Refreshing software repositories..."
 sudo apt-get update > /dev/null
+sudo apt-get upgrade -y  > /dev/null
+
+echo "installing openssh-server"
+sudo apt-get install openssh-server > /dev/hull
+sudo systemctl enable ssh --now
+sudo ufw allow ssh
+sudo ufw enable
+
+# https://www.cyberciti.biz/faq/ubuntu-linux-install-openssh-server/
+# sudo systemctl enable ssh
+# sudo systemctl start ssh
+# 
+# 
+# Configure firewall and open port 22
+# sudo ufw allow ssh
+# sudo ufw enable
+# sudo ufw status
+# man sshd_config
 
 echo "* Installing prerequisite software packages..."
 sudo apt-get install -y software-properties-common > /dev/null
@@ -98,3 +118,8 @@ echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
 # curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # bash switch-to-php-8.1.sh
+
+
+# -----------------------
+# question for you.  my local docker container is running no issues.  php and all modules are installed into wsl
+# problem is docker container does not have 
