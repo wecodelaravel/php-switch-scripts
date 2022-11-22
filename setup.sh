@@ -1,5 +1,65 @@
-sail #!/bin/bash
+#!/bin/bash
 
+#  RUN SCIIPT AS ROOT. USE sudo su - 
+# sudo bash /home/code/php-switch-scripts/setup.sh
+
+
+echo "* Refreshing software repositories..."
+sudo apt-get update #> /dev/null
+sudo apt-get upgrade -y  #> /dev/null
+
+# Install pre-requisite packages.
+sudo apt-get install -y wget apt-transport-https software-properties-common curl unzip  gcc g++ make
+# sudo rm -rf /var/lib/apt/lists/lock
+# sudo rm -rf /var/cache/apt/pkgcache.bin
+# sudo rm -rf /var/cache/apt/srcpkgcache.bin
+
+sudo curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
+sudo apt install nodejs -y && corepack enable
+corepack prepare yarn@stable --activate
+yarn --version
+
+# Download the Microsoft repository GPG keys
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+# Update the list of products
+
+source /home/code/.bashrc
+# Enable the "universe" repositories
+sudo add-apt-repository -y universe
+# Add locate function 
+sudo yum install mlocate
+# add /mnt to PRUNEPATHS in /etc/updatedb.conf in order to avoid indexing Windows files.
+sudo nano /etc/updatedb.conf
+# sudo updatedb
+# Install PowerShell
+# sudo apt-get install -y powershell
+# Start PowerShell
+
+
+
+# Fix and run wsl host resolutionphp 
+# common vars
+wsl='/etc/wsl.conf'
+resolv='/etc/resolv.conf'
+
+# remove standard files
+rm -f $wsl
+rm -f $resolv
+
+# Create custom WSL name resolution
+cp ./dist/wsl.conf $wsl
+cp ./dist/resolv.conf $resolv
+
+# This prevents resolv.conf from being deleted when WSL starts
+chattr +i $resolv
+
+echo 'WSL name resolution configured'
+# echo 'Restart WSL on Windows: "wsl --shutdown"'
+
+
+# IF GIT IS NEEDED UNCOMMENT LINES BELOW
 # echo "install Git for ubuntu"
 # sudo add-apt-repository ppa:git-core/ppa
 # sudo apt-get update > /dev/null
@@ -23,17 +83,21 @@ sail #!/bin/bash
 # subl -a /home/code/codecorp_docker
 
 
+# IF YOU NEED TO REMOVE MLOCATE BECAUSE FAILED INSTALL RUN
+# sudo apt-get remove --auto-remove mlocate plocate
+# sudo apt-get purge --auto-remove mlocate plocate
+
 
 
 echo "* Refreshing software repositories..."
 sudo apt-get update > /dev/null
 sudo apt-get upgrade -y  > /dev/null
 
-echo "installing openssh-server"
-sudo apt-get install openssh-server > /dev/hull
-sudo systemctl enable ssh --now
-sudo ufw allow ssh
-sudo ufw enable
+# echo "installing openssh-server"
+# sudo apt-get install openssh-server > /dev/hull
+# sudo systemctl enable ssh --now
+# sudo ufw allow ssh
+# sudo ufw enable
 
 # https://www.cyberciti.biz/faq/ubuntu-linux-install-openssh-server/
 # sudo systemctl enable ssh
@@ -111,6 +175,16 @@ sudo apt-get install -y php8.1-bz2 php8.1-curl php8.1-gd php8.1-mbstring php8.1-
 echo "* Installing additional PHP extensions..."
 sudo apt-get install -y php-memcache php-memcached php-redis  > /dev/null
 
+
+echo "installing composer"
+cd ~
+# curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+wget -O composer-setup.php https://getcomposer.org/installer
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+sudo chmod +x /usr/local/bin/composer
+sudo composer self-update 
+
+
 echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
 
 # echo "Installing Rust"
@@ -122,3 +196,5 @@ echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
 # -----------------------
 # question for you.  my local docker container is running no issues.  php and all modules are installed into wsl
 # problem is docker container does not have 
+
+

@@ -2,3 +2,8 @@
 php-switch.sublime-project
 php-switch.sublime-workspace
 License.sublime_license
+packages-microsoft-prod.deb.1
+node_modules/.yarn-integrity
+packages-microsoft-prod.deb
+code-script.sh
+yarn.lock
