@@ -3,6 +3,35 @@
 #  RUN SCIIPT AS ROOT. USE sudo su - 
 # sudo bash /home/code/php-switch-scripts/setup.sh
 
+echo "PATH=\$PATH/usr/local/bin/" >> /home/code/.bashrc
+echo "PATH=\$(composer global config bin-dir --absolute --quiet):\$PATH" >> /home/code/.bashrc
+echo "alias ..='cd ..'" >> /home/code/.bashrc
+echo "alias c='clear'" >> /home/code/.bashrc
+echo "alias egrep='egrep --color=auto'" >> /home/code/.bashrc
+echo "alias entry='docker run -it --entrypoint bash '" >> /home/code/.bashrc
+echo "alias ex='docker exec -it'" >> /home/code/.bashrc
+echo "alias fgrep='fgrep --color=auto'" >> /home/code/.bashrc
+echo "alias grep='grep --color=auto'" >> /home/code/.bashrc
+echo "alias l.='ls -d .* --color=auto'" >> /home/code/.bashrc
+echo "alias la='exa -abghH1iS'" >> /home/code/.bashrc
+echo "alias ll='ls -al --color=auto'" >> /home/code/.bashrc
+echo "alias ls='ls --color=auto'" >> /home/code/.bashrc
+echo "alias greset='git reset --hard origin/HEAD'" >> /home/code/.bashrc
+echo "alias ps='docker ps'" >> /home/code/.bashrc
+echo "alias rst='source ~/.bashrc'" >> /home/code/.bashrc
+echo "alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'" >> /home/code/.bashrc
+echo "alias ps='docker ps'" >> /home/code/.bashrc
+echo "alias sc='sail artisan route:clear && sail artisan config:clear && sail artisan cache:clear && composer dumpauto'" >> /home/code/.bashrc
+echo "alias prune='docker system prune -a'" >> /home/code/.bashrc
+echo "alias cc='cd /home/code/codecorp_docker' " >> /home/code/.bashrc
+echo "alias chowndata='sudo chown -R www-data:www-data ./'" >> /home/code/.bashrc
+echo "alias chowncode='sudo chown -R code:code ./'" >> /home/code/.bashrc
+echo "alias chownsail='sudo chown -R sail:sail ./'" >> /home/code/.bashrc
+echo "alias gcompact='git gc --auto'" >> /home/code/.bashrc
+echo "alias ch7='sudo chmod -R 777 /home/code/ && sudo chown -R code:code /home/code'" >> /home/code/.bashrc
+
+
+
 
 echo "* Refreshing software repositories..."
 sudo apt-get update #> /dev/null
@@ -50,6 +79,8 @@ rm -f $resolv
 
 # Create custom WSL name resolution
 cp ./dist/wsl.conf $wsl
+echo "[boot]" >> $wsl
+echo "systemd=true" >> $wsl
 cp ./dist/resolv.conf $resolv
 
 # This prevents resolv.conf from being deleted when WSL starts
@@ -184,6 +215,8 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 sudo chmod +x /usr/local/bin/composer
 sudo composer self-update 
 
+
+# curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 echo "* Setup complete. You may now use the 'switch-to-php-*.*.sh' scripts."
 
